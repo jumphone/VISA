@@ -35,7 +35,6 @@
 
     set.seed(123)
     KC=kmeans(pbmc@reductions$umap@cell.embeddings,centers=30)
-    
     Idents(pbmc)=as.character(KC$cluster)
     DimPlot(pbmc, reduction.use='umap', pt.size=0.1,label=T) 
 
@@ -51,13 +50,17 @@
     DimPlot(pbmc, reduction.use='umap', pt.size=0.1,label=T) 
     
     
-    ATAC.C1.CN=colnames(pbmc)[which(pbmc@meta.data$batch=='ATAC' & Idents(pbmc)=='C1')]
-    ATAC.C1.BC=visa.getBarcode(ATAC.C1.CN)
     
+    
+    ATAC.C1.CN=colnames(pbmc)[which(pbmc@meta.data$batch=='ATAC' & Idents(pbmc)=='C1')]
+    ATAC.C1.BC=visa.getBarcode(ATAC.C1.CN)    
     peaks.BC=visa.getBarcode(colnames(peaks))
     peaks.C1=peaks[,which(peaks.BC %in% ATAC.C1.BC)]
-    peaks.C1.signal=apply(peaks.C1,1,visa.norm.100k)
+    peaks.C1.signal=apply(peaks.C1,1,sum)
+    peaks.C1.signal.norm=visa.norm.100k(peaks.C1.signal)
     
-    BDG=visa.signal2bdg(peaks.C1.signal)
-    write.table(BDG,file='ATAC.C1.bedgraph',quote=FALSE,col.names=FALSE,row.names=FALSE)
+    BDG=visa.signal2bdg(peaks.C1.signal.norm)
+    write.table(BDG,file='ATAC.C1.bedgraph',sep='\t',quote=FALSE,col.names=FALSE,row.names=FALSE)
+    
+    
     
