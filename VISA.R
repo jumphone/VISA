@@ -45,3 +45,38 @@ visa.norm.100k <- function(x){
         }
     return(y)
     }
+
+
+.getChr <-function(x){
+    y=unlist(strsplit(x, ":"))
+    y=y[1]
+    return(y)
+    }
+
+.getStart <-function(x){
+    y=unlist(strsplit(x, ":"))
+    y=y[2]
+    y=unlist(strsplit(y, "-"))
+    y=y[1]
+    return(y)
+    }
+
+.getEnd <-function(x){
+    y=unlist(strsplit(x, ":"))
+    y=y[2]
+    y=unlist(strsplit(y, "-"))
+    y=y[2]
+    return(y)
+    }
+
+visa.signal2bdg <- function(x){
+    x=peaks.C1.signal
+    CN=colnames(x)
+    CHR=apply(matrix(CN,ncol=1),1,.getChr )
+    START=apply(matrix(CN,ncol=1),1,.getStart )
+    END=apply(matrix(CN,ncol=1),1,.getEnd )
+    SIGNAL=x[1,]
+    OUT=cbind(CHR,START,END, paste0('LOC',c(1:length(SIGNAL))),SIGNAL,rep('+',length(SIGNAL)))
+    return(OUT)
+    }
+
