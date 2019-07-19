@@ -10,7 +10,7 @@
     peaks=visa.read10Xatac(PATH='filtered_peak_bc_matrix')
     
     activity.matrix <- CreateGeneActivityMatrix(peak.matrix = peaks, annotation.file = "Mus_musculus.GRCm38.97.chr.gtf",
-        seq.levels = c(1:20, "X", "Y"), upstream = 2000, verbose = TRUE)
+        seq.levels = c(1:19, "X", "Y"), upstream = 2000, verbose = TRUE)
     
     
     
