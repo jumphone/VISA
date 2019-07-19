@@ -64,7 +64,9 @@
     write.table(BDG,file='ATAC.C1.bedgraph',sep='\t',quote=FALSE,col.names=FALSE,row.names=FALSE)
     
     #Then, load data to IGV
-  
+ 
+# IGV
+
 <img src="https://github.com/jumphone/VISA/raw/master/img/VISA4.png" width="1000">
 
     
