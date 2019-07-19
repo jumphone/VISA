@@ -37,3 +37,11 @@ visa.getBarcode <- function(CN){
     return(y)    
     }
 
+visa.norm.100k <- function(x){
+    if(sum(x)!=0){
+        y=x/sum(x)*100000
+        }else{
+        y=x
+        }
+    return(y)
+    }
