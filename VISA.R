@@ -25,4 +25,15 @@ visa.read10Xatac <- function(PATH){
     }
 
 
+.getLast <-function(x){
+    y=unlist(strsplit(x, "_"))
+    y=y[length(y)]
+    return(y)
+    }
+
+
+visa.getBarcode <- function(CN){
+    y=apply(matrix(CN,ncol=1),1,.getLast )
+    return(y)    
+    }
 
