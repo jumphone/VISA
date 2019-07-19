@@ -1,6 +1,7 @@
 
 
 visa.read10Xatac <- function(PATH){
+    PATH=PATH
     library(Matrix)
     indata <- Matrix::readMM(paste0(PATH,"/matrix.mtx")) 
     # binarize the matrix
@@ -14,11 +15,12 @@ visa.read10Xatac <- function(PATH){
     # format peak info
     peakinfo <- read.table(paste0(PATH,"/peaks.bed"))
     names(peakinfo) <- c("chr", "bp1", "bp2")
-    peakinfo$site_name <- paste(peakinfo$chr, peakinfo$bp1, peakinfo$bp2, sep="_")
+    peakinfo$site_name <- paste0(peakinfo$chr,':', peakinfo$bp1,'-',peakinfo$bp2)
     row.names(peakinfo) <- peakinfo$site_name
 
     row.names(indata) <- row.names(peakinfo)
     colnames(indata) <- row.names(cellinfo)
+    
     return(indata)
     }
 
