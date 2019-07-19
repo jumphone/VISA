@@ -1,7 +1,8 @@
 # VISA
 
+### VISuAlize single cell data 
 
-### VIsualize Single-cell Atac data 
+# Load ATAC Data
 
     library(Seurat)
     source('https://raw.githubusercontent.com/jumphone/VISA/master/VISA.R')
