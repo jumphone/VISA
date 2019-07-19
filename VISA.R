@@ -70,12 +70,11 @@ visa.norm.100k <- function(x){
     }
 
 visa.signal2bdg <- function(x){
-    x=peaks.C1.signal
-    CN=colnames(x)
+    CN=names(x)
     CHR=apply(matrix(CN,ncol=1),1,.getChr )
     START=apply(matrix(CN,ncol=1),1,.getStart )
     END=apply(matrix(CN,ncol=1),1,.getEnd )
-    SIGNAL=x[1,]
+    SIGNAL=x
     OUT=cbind(CHR,START,END, paste0('LOC',c(1:length(SIGNAL))),SIGNAL,rep('+',length(SIGNAL)))
     return(OUT)
     }
