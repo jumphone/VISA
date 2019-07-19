@@ -30,7 +30,7 @@
     DimPlot(pbmc, reduction.use='umap', group.by='batch', pt.size=0.1,label=F) 
     
     
-<img src="https://github.com/jumphone/VISA/raw/master/img/VISA1.png" width="200">
+<img src="https://github.com/jumphone/VISA/raw/master/img/VISA1.png" width="500">
 
 
 
@@ -39,7 +39,7 @@
     Idents(pbmc)=as.character(KC$cluster)
     DimPlot(pbmc, reduction.use='umap', pt.size=0.1,label=T) 
 
-<img src="https://github.com/jumphone/VISA/raw/master/img/VISA2.png" width="200">
+<img src="https://github.com/jumphone/VISA/raw/master/img/VISA2.png" width="500">
 
 
     COMKC=rep(NA,length(KC$cluster))
@@ -50,7 +50,7 @@
     Idents(pbmc)=as.character(COMKC)
     DimPlot(pbmc, reduction.use='umap', pt.size=0.1,label=T) 
     
-<img src="https://github.com/jumphone/VISA/raw/master/img/VISA3.png" width="200">
+<img src="https://github.com/jumphone/VISA/raw/master/img/VISA3.png" width="500">
 
     
     ATAC.C1.CN=colnames(pbmc)[which(pbmc@meta.data$batch=='ATAC' & Idents(pbmc)=='C1')]
@@ -65,7 +65,7 @@
     
     #Then, load data to IGV
   
-<img src="https://github.com/jumphone/VISA/raw/master/img/VISA4.png" width="200">
+<img src="https://github.com/jumphone/VISA/raw/master/img/VISA4.png" width="500">
 
     
     
