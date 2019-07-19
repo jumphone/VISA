@@ -74,7 +74,7 @@ visa.signal2bdg <- function(x){
     CHR=apply(matrix(CN,ncol=1),1,.getChr )
     START=apply(matrix(CN,ncol=1),1,.getStart )
     END=apply(matrix(CN,ncol=1),1,.getEnd )
-    SIGNAL=x
+    SIGNAL=round(x,2)
     OUT=cbind(CHR,START,END,SIGNAL)
     return(OUT)
     }
