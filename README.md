@@ -65,7 +65,7 @@
     
     #Then, load data to IGV
   
-<img src="https://github.com/jumphone/VISA/raw/master/img/VISA4.png" width="500">
+<img src="https://github.com/jumphone/VISA/raw/master/img/VISA4.png" width="1000">
 
     
     
