@@ -58,7 +58,7 @@
     peaks.BC=visa.getBarcode(colnames(peaks))
     peaks.C1=peaks[,which(peaks.BC %in% ATAC.C1.BC)]
     peaks.C1.signal=apply(peaks.C1,1,sum)
-    peaks.C1.signal.normal=peaks.C1.signal/length(ATAC.C1.BC)
+    peaks.C1.signal.norm=peaks.C1.signal/length(ATAC.C1.BC)
     
     BDG=visa.signal2bdg(peaks.C1.signal.norm)
     write.table(BDG,file='ATAC.C1.bedgraph',sep='\t',quote=FALSE,col.names=FALSE,row.names=FALSE)
