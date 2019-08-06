@@ -79,14 +79,36 @@
 <img src="https://github.com/jumphone/VISA/raw/master/img/VISA3.png" width="500">
 
     
-    ATAC.C1.CN=colnames(pbmc)[which(pbmc@meta.data$batch=='ATAC' & Idents(pbmc)=='C1')]
+    ATAC.C1.CN=colnames(pbmc)[which(pbmc@meta.data$batch=='ATAC' & Idents(pbmc)=='1')]
     ATAC.C1.BC=visa.getBarcode(ATAC.C1.CN)    
     peaks.BC=visa.getBarcode(colnames(peaks))
     peaks.C1=peaks[,which(peaks.BC %in% ATAC.C1.BC)]
     peaks.C1.signal=apply(peaks.C1,1,sum)
     peaks.C1.signal.norm=peaks.C1.signal/length(ATAC.C1.BC)
+    peaks.C1.signal.norm.log=log(peaks.C1.signal.norm+1,10)
     
-    BDG=visa.signal2bdg(peaks.C1.signal.norm)
+    
+    
+    
+    
+    BDG=visa.signal2bdg(peaks.C1.signal.norm.log)
+    
+    CHRs=unique(BDG[,1])
+    i=1
+    while(i<=length(CHRs)){
+        this_chr=CHRs[i]
+        this_index=which(BDG[,1] == this_chr)
+        this_n=min(1000,length(this_index))
+        this_start=as.numeric(BDG[this_index,2])
+        this_end=as.numeric(BDG[this_index,3])
+        this_signal=as.numeric(BDG[this_index,4])
+        this_data=cbind(this_start,this_end,this_signal)
+        this_data_scale=apply(this_data,2,scale)
+        KM=kmeans(this_data_scale[,c(1:2)],centers = this_n )      
+        
+        i=i+1
+        }
+    
     write.table(BDG,file='ATAC.C1.bedgraph',sep='\t',quote=FALSE,col.names=FALSE,row.names=FALSE)
     
     #Then, load data to IGV
