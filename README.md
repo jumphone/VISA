@@ -61,7 +61,7 @@
   
   
   
-<img src="https://github.com/jumphone/VISA/raw/master/img/VISA2.2.png" width="500">
+<img src="https://github.com/jumphone/VISA/raw/master/img/VISA2.2.png" width="400">
     
     
     CELL.CLUST=rep(NA,ncol(pbmc))
