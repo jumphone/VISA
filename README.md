@@ -38,17 +38,43 @@
     KC=kmeans(pbmc@reductions$umap@cell.embeddings,centers=30)
     Idents(pbmc)=as.character(KC$cluster)
     DimPlot(pbmc, reduction.use='umap', pt.size=0.1,label=T) 
+    
 
 <img src="https://github.com/jumphone/VISA/raw/master/img/VISA2.png" width="500">
 
-
-    COMKC=rep(NA,length(KC$cluster))
-    COMKC[which(KC$cluster %in% c(21,2,10,30,28,15,12,29,7,6,3,26))]='C1'
-    COMKC[which(KC$cluster %in% c(25,1,11,5))]='C2'
-    COMKC[which(KC$cluster %in% c(13,16,9,27,4,20,24,22,23,18,19,14,8,17))]='C3'
     
-    Idents(pbmc)=as.character(COMKC)
+    KCREF=.generate_mean(as.matrix(pbmc@assays$RNA@data), as.character(KC$cluster))  
+    library('gplots')
+    C=cor(KCREF,method='spearman')
+    H=heatmap.2(C,scale=c("none"),dendrogram='both',Colv=TRUE,Rowv=TRUE,trace='none',
+        col=colorRampPalette(c('blue','white','red')),margins=c(5,5))
+    HC=as.hclust(H$colDendrogram)
+    CLUST=cutree(HC,k=3)
+    
+    RC=rep('black',ncol(C))
+    RC[which(CLUST==1)]='red'
+    RC[which(CLUST==2)]='blue'
+    RC[which(CLUST==3)]='green'
+    
+    heatmap.2(C,scale=c("none"),dendrogram='both',Colv=TRUE,Rowv=TRUE,trace='none',
+        col=colorRampPalette(c('blue','white','red')),RowSideColors=RC,margins=c(5,5))
+  
+  
+  
+<img src="https://github.com/jumphone/VISA/raw/master/img/VISA2.2.png" width="500">
+    
+    
+    CELL.CLUST=rep(NA,ncol(pbmc))
+    i=1
+    while(i<=max(CLUST)){
+        CELL.CLUST[which(KC$cluster %in% names(CLUST[which(CLUST==i)]))]=i
+        i=i+1
+        }
+        
+    Idents(pbmc)=as.character(CELL.CLUST)
     DimPlot(pbmc, reduction.use='umap', pt.size=0.1,label=T) 
+
+     
     
 <img src="https://github.com/jumphone/VISA/raw/master/img/VISA3.png" width="500">
 
