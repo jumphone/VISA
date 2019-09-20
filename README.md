@@ -4,6 +4,8 @@
 
 # Load ATAC Data
 
+    
+
     library(Seurat)
     source('https://raw.githubusercontent.com/jumphone/VISA/master/VISA.R')
 
@@ -15,6 +17,7 @@
     
 # Visualize Peaks
 
+    #setwd('F:/BEER_REVISE/ATAC')
     source('https://raw.githubusercontent.com/jumphone/BEER/master/BEER.R')
 
     library(Seurat)
