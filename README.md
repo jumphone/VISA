@@ -87,17 +87,32 @@
     ATAC.C1.CN=colnames(pbmc)[which(pbmc@meta.data$batch=='ATAC' & Idents(pbmc)=='1')]
     ATAC.C1.BC=visa.getBarcode(ATAC.C1.CN)    
     peaks.BC=visa.getBarcode(colnames(peaks))
-    peaks.C1=peaks[,which(peaks.BC %in% ATAC.C1.BC)]
-    peaks.C1.signal=apply(peaks.C1,1,sum)
-    peaks.C1.signal.norm=peaks.C1.signal/length(ATAC.C1.BC)
-    peaks.C1.signal.norm.log=log(peaks.C1.signal.norm+1,10)
+    peaks.C1=as.matrix(peaks[,which(peaks.BC %in% ATAC.C1.BC)])
+    
+    
+    peaks.C1.percent=peaks.C1
+    peaks.C1.percent[which(peaks.C1>0)]=1
+    
+    peaks.C1.signal=apply(peaks.C1,1,mean)
+       
+    BDG=visa.signal2bdg(peaks.C1.signal)
     
     
     
+    write.table(BDG,file='ATAC.C1.bedgraph',sep='\t',quote=FALSE,col.names=FALSE,row.names=FALSE)
     
-    
-    BDG=visa.signal2bdg(peaks.C1.signal.norm.log)
-    
+    #Then, load data to IGV
+ 
+# IGV
+
+<img src="https://github.com/jumphone/VISA/raw/master/img/VISA4.png" width="1000">
+
+ 
+ 
+ 
+
+
+
     CHRs=unique(BDG[,1])
     i=1
     while(i<=length(CHRs)){
@@ -113,14 +128,4 @@
         
         i=i+1
         }
-    
-    write.table(BDG,file='ATAC.C1.bedgraph',sep='\t',quote=FALSE,col.names=FALSE,row.names=FALSE)
-    
-    #Then, load data to IGV
- 
-# IGV
-
-<img src="https://github.com/jumphone/VISA/raw/master/img/VISA4.png" width="1000">
-
-    
     
