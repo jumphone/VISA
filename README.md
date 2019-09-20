@@ -112,7 +112,7 @@
  
 
 
-
+# TMP
     CHRs=unique(BDG[,1])
     i=1
     while(i<=length(CHRs)){
