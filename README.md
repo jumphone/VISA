@@ -93,7 +93,7 @@
     peaks.C1.percent=peaks.C1
     peaks.C1.percent[which(peaks.C1>0)]=1
     
-    peaks.C1.signal=apply(peaks.C1,1,mean)
+    peaks.C1.signal=round(apply(peaks.C1,1,mean)*100)
        
     BDG=visa.signal2bdg(peaks.C1.signal)
     
