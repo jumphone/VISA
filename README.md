@@ -18,8 +18,10 @@
 # Visualize Peaks
 
     #setwd('F:/BEER_REVISE/ATAC')
+    
     source('https://raw.githubusercontent.com/jumphone/BEER/master/BEER.R')
-
+    source('https://raw.githubusercontent.com/jumphone/VISA/master/VISA.R')
+    
     library(Seurat)
     peaks <- Read10X_h5("../data/atac_v1_pbmc_10k_filtered_peak_bc_matrix.h5")
     
