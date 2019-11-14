@@ -103,14 +103,15 @@ visa.plot3d <- function(VEC, COL){
 
 ############################################
 
-#VEC=pbmc@reductions$umap@cell.embeddings
-#DIST=as.matrix(dist(VEC))
-#library(princurve)
-#P.VEC=principal_curve(VEC)
-#visa.plot3d(P.VEC$s,COL)
+VEC=pbmc@reductions$umap@cell.embeddings
+visa.plot3d(VEC,COL)
 
+library(princurve)
+P.VEC=principal_curve(VEC)
+visa.plot3d(P.VEC$s,COL)
 
-
+MIN=apply(VEC,2,min)
+MAX=apply(VEC,2,max)
 
 
 
