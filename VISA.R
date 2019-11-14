@@ -79,3 +79,22 @@ visa.signal2bdg <- function(x){
     return(OUT)
     }
 
+
+
+visa.col <- function(TAG){
+    TAG=as.factor(TAG)
+    require(scales)
+    my_color_palette <- hue_pal()(length(unique(TAG)))
+    COL=my_color_palette[TAG]
+    return(COL)
+    }
+
+visa.3d <- function(VEC, COL){
+    VEC=VEC
+    COL=COL
+    library("rgl")
+    library("car")
+    scatter3d(VEC[,1], VEC[,2], VEC[,3], point.col = COL, surface=FALSE)  
+    }
+
+
