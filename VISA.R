@@ -101,6 +101,17 @@ visa.plot3d <- function(VEC, COL){
               point.col = COL, surface=FALSE)  
     }
 
+############################################
+
+#VEC=pbmc@reductions$umap@cell.embeddings
+#DIST=as.matrix(dist(VEC))
+#library(princurve)
+#P.VEC=principal_curve(VEC)
+#visa.plot3d(P.VEC$s,COL)
+
+
+
+
 
 
 
