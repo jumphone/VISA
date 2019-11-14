@@ -80,6 +80,8 @@ visa.signal2bdg <- function(x){
     }
 
 
+###############
+#11.14,2019
 
 visa.col <- function(TAG){
     TAG=as.factor(TAG)
@@ -89,12 +91,19 @@ visa.col <- function(TAG){
     return(COL)
     }
 
-visa.3d <- function(VEC, COL){
+visa.plot3d <- function(VEC, COL){
     VEC=VEC
     COL=COL
     library("rgl")
     library("car")
-    scatter3d(VEC[,1], VEC[,2], VEC[,3], point.col = COL, surface=FALSE)  
+    scatter3d(VEC[,1], VEC[,2], VEC[,3], 
+              xlab=colnames(VEC)[1], ylab=colnames(VEC)[2], zlab=colnames(VEC)[3],
+              point.col = COL, surface=FALSE)  
     }
+
+
+
+
+
 
 
