@@ -83,13 +83,26 @@ visa.signal2bdg <- function(x){
 ###############
 #11.14,2019
 
-visa.col <- function(TAG){
+visa.lcol <- function(TAG){
     TAG=as.factor(TAG)
     require(scales)
     my_color_palette <- hue_pal()(length(unique(TAG)))
     COL=my_color_palette[TAG]
     return(COL)
     }
+
+visa.col=visa.lcol
+
+
+visa.vcol <- function(VALUE, CV, CN){
+    VALUE=VALUE 
+    library('circlize')
+    CRF=colorRamp2(CV, CN)
+    COL=CRF(VALUE)
+    return(COL)
+    }
+
+
 
 visa.plot3d <- function(VEC, COL){
     VEC=VEC
@@ -100,6 +113,24 @@ visa.plot3d <- function(VEC, COL){
               xlab=colnames(VEC)[1], ylab=colnames(VEC)[2], zlab=colnames(VEC)[3],
               point.col = COL, surface=FALSE)  
     }
+
+
+visa.id3d <- function(VEC, COL='blue'){
+    VEC=VEC
+    LABEL=rownames(VEC)
+    COL=COL
+    library("rgl")
+    library("car")
+    x=VEC[,1]
+    y=VEC[,2]
+    z=VEC[,3]
+    OUT=Identify3d(x, y, z, axis.scales=TRUE, groups = NULL, labels = LABEL,
+           col = 'blue',
+           offset = ((100/length(x))^(1/3)) * 0.02)
+    return(OUT)
+    }
+
+
 
 ############################################
 
