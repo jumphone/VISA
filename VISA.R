@@ -173,7 +173,7 @@ visa.generate_mean <- function(exp_sc_mat, TAG, print_step=100){
     }
 
 
-visa.densityClustPlot <- function(VEC, CLUST, SIZE=1){
+visa.densityClustPlot <- function(VEC, CLUST, SIZE=5){
     library(MASS)
     library(ggplot2)
     ################################
