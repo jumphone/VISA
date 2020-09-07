@@ -197,6 +197,7 @@ visa.densityClustPlot <- function(VEC, CLUST, SIZE=5){
     rrr.df = data.frame(rrr.x); colnames(rrr.df) = c("x","y")
     ##############################################
     OUT=ggplot(data=df,aes(x,y)) + 
+        geom_point(colour='grey60',size=0.8)+
         stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour='black') + 
         scale_fill_continuous(low="green",high="red") + 
         ############################
