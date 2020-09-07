@@ -173,12 +173,13 @@ visa.generate_mean <- function(exp_sc_mat, TAG, print_step=100){
     }
 
 
-visa.densityClustPlot <- function(VEC, CLUST){
+visa.densityClustPlot <- function(VEC, CLUST, SIZE=1){
     library(MASS)
     library(ggplot2)
     ################################
     VEC=VEC
     CLUST=CLUST
+    SIZE=SIZE
     ###############################
     CLUST.VEC=t(visa.generate_mean( t(VEC),as.character(CLUST) ))
     ###############################
@@ -199,7 +200,7 @@ visa.densityClustPlot <- function(VEC, CLUST){
         stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour='black') + 
         scale_fill_continuous(low="green",high="red") + 
         ############################
-        geom_text(data=rrr.df, label=rownames(CLUST.VEC), check_overlap = TRUE) +
+        geom_text(data=rrr.df, label.size=SIZE, label=rownames(CLUST.VEC), check_overlap = TRUE) +
         #############################
         xlim(c(min(VEC[,1])-1,max(VEC[,1])+1))+ylim(c(min(VEC[,2])-1,max(VEC[,2])+1))+
         guides(alpha="none") +commonTheme
