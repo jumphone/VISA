@@ -200,7 +200,7 @@ visa.densityClustPlot <- function(VEC, CLUST, SIZE=1){
         stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour='black') + 
         scale_fill_continuous(low="green",high="red") + 
         ############################
-        geom_text(data=rrr.df, label.size=SIZE, label=rownames(CLUST.VEC), check_overlap = TRUE) +
+        geom_text(data=rrr.df, size=SIZE, label=rownames(CLUST.VEC), check_overlap = TRUE) +
         #############################
         xlim(c(min(VEC[,1])-1,max(VEC[,1])+1))+ylim(c(min(VEC[,2])-1,max(VEC[,2])+1))+
         guides(alpha="none") +commonTheme
@@ -228,13 +228,13 @@ visa.densityPlot <- function(VEC){
                    theme_bw()
                    )
     #############################################
-    
+    #COL='grey40'
     ##############################################
     OUT=ggplot(data=df,aes(x,y)) + 
         stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour='black') + 
         scale_fill_continuous(low="green",high="red") + 
         ############################
-        
+        #geom_point(colour=COL,size=0.8)+
         #############################
         xlim(c(min(VEC[,1])-1,max(VEC[,1])+1))+ylim(c(min(VEC[,2])-1,max(VEC[,2])+1))+
         guides(alpha="none") +commonTheme
