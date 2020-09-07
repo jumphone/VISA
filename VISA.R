@@ -188,8 +188,8 @@ visa.densityClustPlot <- function(VEC, CLUST, SIZE=5){
     df = data.frame(x); colnames(df) = c("x","y")
 
     commonTheme = list(labs(color="Density",fill="Density",
-                        x="UMAP_1",
-                        y="UMAP_2"),
+                        x=colnames(VEC)[1],
+                        y=colnames(VEC)[2]),
                    theme_bw()
                    )
     #############################################
@@ -223,8 +223,8 @@ visa.densityPlot <- function(VEC){
     df = data.frame(x); colnames(df) = c("x","y")
 
     commonTheme = list(labs(color="Density",fill="Density",
-                        x="UMAP_1",
-                        y="UMAP_2"),
+                        x=colnames(VEC)[1],
+                        y=colnames(VEC)[2]),
                    theme_bw()
                    )
     #############################################
