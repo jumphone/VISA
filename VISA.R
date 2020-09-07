@@ -192,14 +192,14 @@ visa.densityClustPlot <- function(VEC, CLUST){
                    theme_bw()
                    )
     #############################################
-    rrr.x <-KMC.VEC
+    rrr.x <-CLUST.VEC
     rrr.df = data.frame(rrr.x); colnames(rrr.df) = c("x","y")
     ##############################################
     OUT=ggplot(data=df,aes(x,y)) + 
         stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour='black') + 
         scale_fill_continuous(low="green",high="red") + 
         ############################
-        geom_text(data=rrr.df, label=rownames(KMC.VEC), check_overlap = TRUE) +
+        geom_text(data=rrr.df, label=rownames(CLUST.VEC), check_overlap = TRUE) +
         #############################
         xlim(c(min(VEC[,1])-1,max(VEC[,1])+1))+ylim(c(min(VEC[,2])-1,max(VEC[,2])+1))+
         guides(alpha="none") +commonTheme
@@ -213,9 +213,9 @@ visa.densityPlot <- function(VEC){
     library(ggplot2)
     ################################
     VEC=VEC
-    #CLUST=CLUST
+    
     ###############################
-    #CLUST.VEC=t(visa.generate_mean( t(VEC),as.character(CLUST) ))
+    
     ###############################
     n <- 1000
     x <- VEC
@@ -227,14 +227,13 @@ visa.densityPlot <- function(VEC){
                    theme_bw()
                    )
     #############################################
-    #rrr.x <-KMC.VEC
-    #rrr.df = data.frame(rrr.x); colnames(rrr.df) = c("x","y")
+    
     ##############################################
     OUT=ggplot(data=df,aes(x,y)) + 
         stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour='black') + 
         scale_fill_continuous(low="green",high="red") + 
         ############################
-        #geom_text(data=rrr.df, label=rownames(KMC.VEC), check_overlap = TRUE) +
+        
         #############################
         xlim(c(min(VEC[,1])-1,max(VEC[,1])+1))+ylim(c(min(VEC[,2])-1,max(VEC[,2])+1))+
         guides(alpha="none") +commonTheme
