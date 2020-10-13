@@ -448,61 +448,6 @@ fastDM.smoothEXP <- function(EXP, VEC, CUT=0.1, COR.N=100, SEED=123){
 
 
 
-fastDM.smoothPosEXP <- function(EXP, VEC, CUT=0.1, COR.N=100, SEED=123){
-    EXP=EXP
-    VEC=VEC
-    SEED=SEED
-    CUT=CUT
-    COR.N=COR.N
-    ###############
-    set.seed(SEED)
-    library(umap)
-    custom.config = umap.defaults
-    custom.config$n_neighbors=15
-    custom.config$n_components=1
-    custom.config$spread=1
-    custom.config$min_dist=0.1
-    UMAP1.OUT=umap(VEC,config =custom.config,method='umap-learn')
-    UMAP1=UMAP1.OUT$layout
-    #plot(UMAP1,pch=16,col='grey70',cex=0.5)
-    U.EXP=EXP
-    O.UMAP1=order(UMAP1[,1])
-    i=1
-    while(i<=nrow(EXP)){
-        this_ordered_exp=EXP[i,O.UMAP1]
-        this_smooth=smooth.spline(this_ordered_exp)
-        this_y=this_smooth$y
-        this_y[which(this_y<=0)]=0
-        this_y[which(this_ordered_exp<=0)]=0
-        U.EXP[i,O.UMAP1[this_smooth$x]]=this_y
-        if(i %%1000==1){print(i)}
-        i=i+1}
-
-    #plot(UMAP1[,1],U.EXP[1,],pch=16,col='grey70',cex=0.5)
-    #SU.EXP=t(apply(U.EXP,1,scale))
-    SU.EXP=U.EXP
-    rownames(SU.EXP)=rownames(U.EXP)
-    colnames(SU.EXP)=colnames(U.EXP) 
-    #######################
-    set.seed(SEED)
-    USED.INDEX=sample(1:ncol(EXP),COR.N)
-    SCOR=c()
-    i=1
-    while(i<=nrow(SU.EXP)){
-        this_scor=cor(EXP[i,USED.INDEX],SU.EXP[i,USED.INDEX],method='spearman')
-        SCOR=c(SCOR,this_scor)
-        if(i%%1000==1){print(i)}
-        i=i+1}
-    #######################
-    F.SU.EXP=SU.EXP[which(SCOR>CUT),]
-    ######################
-    RESULT=list()
-    RESULT$smoothedEXP=SU.EXP
-    RESULT$filteredSmoothedEXP=F.SU.EXP
-    RESULT$spearmanCor=SCOR
-    #plot(UMAP1[,1],SU.EXP[1,],pch=16,col='grey70',cex=0.5)
-    return(RESULT)
-    }
 
 
 
