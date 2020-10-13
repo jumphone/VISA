@@ -432,7 +432,6 @@ fastDM.smoothEXP <- function(EXP, VEC, CUT=0.1, COR.N=100, SEED=123){
     i=1
     while(i<=nrow(SU.EXP)){
         this_scor=cor(EXP[i,USED.INDEX],SU.EXP[i,USED.INDEX],method='spearman')
-        LCOR=c(LCOR,this_lcor)
         SCOR=c(SCOR,this_scor)
         if(i%%1000==1){print(i)}
         i=i+1}
